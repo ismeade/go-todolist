@@ -38,7 +38,6 @@ func initBucket(bucket []byte) {
 	})
 }
 
-//把数据插入到bolt数据库中，相当于redis中的set命令
 func insert(bucket []byte, key, value string) error {
 
 	k := []byte(key)
@@ -52,7 +51,6 @@ func insert(bucket []byte, key, value string) error {
 	return err
 }
 
-//删除一个指定的key中的数据
 func rm(bucket []byte, key string) {
 	k := []byte(key)
 	db.Update(func(tx *bolt.Tx) error {
@@ -62,7 +60,6 @@ func rm(bucket []byte, key string) {
 	})
 }
 
-//读取一条数据
 func read(bucket []byte, key string) string {
 	k := []byte(key)
 	var val []byte
@@ -74,7 +71,6 @@ func read(bucket []byte, key string) string {
 	return string(val)
 }
 
-//遍历指定的bucket中的数据
 func fetchAll(bucket []byte) {
 	db.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket(bucket)
@@ -84,8 +80,4 @@ func fetchAll(bucket []byte) {
 		}
 		return nil
 	})
-}
-
-func test() {
-	defer db.Close()
 }

@@ -33,7 +33,7 @@ func GetAll() {
 }
 
 func (t todo) Show() string {
-	return t.created + ": " + t.topic + " - " + t.desc + "\n"
+	return t.created + " " + t.topic + " - " + t.desc + "\n"
 }
 
 func init() {
