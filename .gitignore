@@ -1,7 +1,9 @@
-/*
-!*.go
+*
+
+!*/
+!*/**/
+!**/*.go
 !go.mod
 !go.sum
-!*.yml
 !*.md
 !.gitignore
