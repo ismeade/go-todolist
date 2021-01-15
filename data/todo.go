@@ -1,14 +1,10 @@
-//
 // todo.go
-// Copyright (C) 2020 liyang <yang.li@51vcheck.cn>
+// liyang
 //
-// Distributed under terms of the MIT license.
-//
-
 package data
 
 import (
-	"fmt"
+	"encoding/json"
 	"time"
 )
 
@@ -17,15 +13,18 @@ var (
 )
 
 type todo struct {
-	topic   string
-	desc    string
-	created string
+	Id      string `json:"id"`
+	Message string `json:"message"`
+	Created string `json:"created"`
 }
 
-func Add(topic, desc string) {
-	t := todo{topic, desc, time.Now().Format("2006-01-02 03:04:05")}
-	insert(bucket, topic, t.Show())
-	fmt.Printf("add:%s\n", t.Show())
+func Add(message string) error {
+	t := todo{string(time.Now().Unix()), message, time.Now().Format("2006-01-02 03:04:05")}
+	value, err := json.Marshal(t)
+	if err != nil {
+		insert(bucket, []byte(t.Id), value)
+	}
+	return err
 }
 
 func GetAll() {
@@ -33,7 +32,7 @@ func GetAll() {
 }
 
 func (t todo) Show() string {
-	return t.created + " " + t.topic + " - " + t.desc + "\n"
+	return t.Created + " " + t.Message + "\n"
 }
 
 func init() {

@@ -14,20 +14,20 @@ var (
 type Config struct {
 }
 
-func SetToken(token string) {
-	insert(bucketConfig, "token", token)
+func SetToken(token []byte) {
+	insert(bucketConfig, []byte("token"), token)
 }
 
-func GetToken(token string) string {
-	return read(bucketConfig, "token")
+func GetToken(token []byte) []byte {
+	return read(bucketConfig, []byte("token"))
 }
 
-func SetKey(key string) {
-	insert(bucketConfig, "key", key)
+func SetKey(key []byte) {
+	insert(bucketConfig, []byte("key"), key)
 }
 
-func GetKey(key string) string {
-	return read(bucketConfig, "key")
+func GetKey(key []byte) []byte {
+	return read(bucketConfig, []byte("key"))
 }
 
 func init() {

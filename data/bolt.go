@@ -38,45 +38,39 @@ func initBucket(bucket []byte) {
 	})
 }
 
-func insert(bucket []byte, key, value string) error {
-
-	k := []byte(key)
-	v := []byte(value)
-	err := db.Update(func(tx *bolt.Tx) error {
+func insert(bucket, key, value []byte) error {
+	return db.Update(func(tx *bolt.Tx) error {
 		b := tx.Bucket(bucket)
-
-		err := b.Put(k, v)
-		return err
-	})
-	return err
-}
-
-func rm(bucket []byte, key string) {
-	k := []byte(key)
-	db.Update(func(tx *bolt.Tx) error {
-		b := tx.Bucket(bucket)
-		err := b.Delete(k)
+		err := b.Put(key, value)
 		return err
 	})
 }
 
-func read(bucket []byte, key string) string {
-	k := []byte(key)
+func rm(bucket, key []byte) error {
+	return db.Update(func(tx *bolt.Tx) error {
+		b := tx.Bucket(bucket)
+		err := b.Delete(key)
+		return err
+	})
+}
+
+func read(bucket, key []byte) []byte {
 	var val []byte
 	db.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket(bucket)
-		val = b.Get(k)
+		val = b.Get(key)
 		return nil
 	})
-	return string(val)
+	return val
 }
 
 func fetchAll(bucket []byte) {
+	var vals [][]byte
 	db.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket(bucket)
 		cur := b.Cursor()
 		for k, v := cur.First(); k != nil; k, v = cur.Next() {
-			fmt.Printf("key is %s,value is %s\n", k, v)
+			vals = append(vals, v)
 		}
 		return nil
 	})

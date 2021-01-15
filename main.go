@@ -32,9 +32,9 @@ func main() {
 
 	if len(args) >= 1 {
 		switch args[0] {
-		case "list":
+		case "l", "list":
 			fmt.Printf("%s\n", "list")
-		case "add":
+		case "a", "add":
 			if len(args) == 3 {
 				data.Add(args[1], args[2])
 			} else {
@@ -42,7 +42,7 @@ func main() {
 			}
 		case "u", "update":
 			fmt.Printf("%s\n", "update")
-		case "download":
+		case "d", "download":
 			fmt.Printf("%s\n", "download")
 		default:
 			strType := args[0]
