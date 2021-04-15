@@ -9,7 +9,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"go-todolist/data"
 	"os"
 )
 
@@ -36,7 +35,7 @@ func main() {
 			fmt.Printf("%s\n", "list")
 		case "a", "add":
 			if len(args) == 3 {
-				data.Add(args[1], args[2])
+
 			} else {
 				fmt.Println("args error")
 			}
