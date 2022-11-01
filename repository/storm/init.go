@@ -1,4 +1,3 @@
-// Package storm provides ...
 package storm
 
 import (
@@ -28,7 +27,7 @@ func ConnectStorm() *storm.DB {
 		}
 	}
 
-	CreateDirIfNotExist(path.Dir(dbPath))
+	createDirIfNotExist(path.Dir(dbPath))
 
 	db, openErr := storm.Open(dbPath)
 	if openErr != nil {
@@ -37,8 +36,8 @@ func ConnectStorm() *storm.DB {
 	return db
 }
 
-// CreateDirIfNotExist creates a directory if not found
-func CreateDirIfNotExist(dir string) {
+// createDirIfNotExist creates a directory if not found
+func createDirIfNotExist(dir string) {
 	if _, err := os.Stat(dir); os.IsNotExist(err) {
 		err = os.MkdirAll(dir, 0755)
 		if err != nil {

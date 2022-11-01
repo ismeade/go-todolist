@@ -1,7 +1,5 @@
 //
 // main.go
-// Copyright (C) 2020 liyang <yang.li@51vcheck.cn>
-//
 //
 
 package main

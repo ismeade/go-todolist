@@ -1,6 +1,3 @@
-// todo.go
-// liyang
-//
 package model
 
 var (

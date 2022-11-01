@@ -14,7 +14,7 @@ type TodoRepository struct {
 }
 
 func NewTodoRepository(db *storm.DB) TodoRepository {
-	return &TodoRepository{db}
+	return TodoRepository{db}
 }
 
 func (t *TodoRepository) GetAll([]model.Todo, error) {
