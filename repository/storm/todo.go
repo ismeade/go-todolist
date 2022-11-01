@@ -22,7 +22,7 @@ func (t *TodoRepository) GetAll([]model.Todo, error) {
 }
 
 func Create(message string) error {
-	t := model.Todo{string(rune(time.Now().Unix())), message, time.Now().Format("2006-01-02 03:04:05")}
+	t := model.Todo{Id: string(rune(time.Now().Unix())), Message: message, Created: time.Now().Format("2006-01-02 03:04:05")}
 	value, err := json.Marshal(t)
 	if err != nil {
 		fmt.Println(value)

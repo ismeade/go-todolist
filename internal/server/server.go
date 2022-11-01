@@ -94,7 +94,6 @@ func JWTAuthMiddleware() func(c *gin.Context) {
 
 func homeHandler(c *gin.Context) {
 	username := c.MustGet("username").(string)
-	a := "abc"
 	c.JSON(http.StatusOK, gin.H{
 		"code": 2000,
 		"msg":  "success",
