@@ -1,36 +1,25 @@
-package storm
+package repository
 
 import (
 	"go-todolist/util"
-	"io/ioutil"
 	"log"
 	"os"
 	"path"
 
 	"github.com/asdine/storm"
-	"github.com/mitchellh/go-homedir"
 )
 
 // ConnectStorm Create database connection
-func ConnectStorm() *storm.DB {
-	dbPath := util.GetEnvStr("DB_FILE", "")
-	var err error
-
-	if dbPath == "" {
-		// Try in home dir
-		dbPath, err = homedir.Expand("~/.geek-life/default.db")
-
-		// If home dir is not detected, try in system tmp dir
-		if err != nil {
-			f, _ := ioutil.TempFile("geek-life", "default.db")
-			dbPath = f.Name()
-		}
+func connectStorm(dbName string) *storm.DB {
+	if dbName == "" {
+		dbName = "default.db"
 	}
+	dbPath := util.GetEnvStr("DB_FILE", "~/.go-todolist/"+dbName)
 
 	createDirIfNotExist(path.Dir(dbPath))
 
-	db, openErr := storm.Open(dbPath)
-	if openErr != nil {
+	db, err := storm.Open(dbPath)
+	if err != nil {
 		log.Fatal("FATAL ERROR: Exiting program! - Could not connect Embedded Database File")
 	}
 	return db
