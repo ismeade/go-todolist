@@ -17,7 +17,8 @@ message ListTaskRequest {
 
 // 定义响应的message
 message ListTaskReply {
-  repeated TaskReply taskReply = 1;
+  int32 count = 1;
+  repeated TaskReply taskReply = 2;
 }
 
 message TaskReply {
