@@ -13,7 +13,7 @@ service Greeter {
   rpc SayHello (HelloRequest) returns (HelloReply) {
     // 添了google.api.http注释
     option (google.api.http) = {
-      post: "/v1/example/echo"
+      post: "/v1/hello"
       body: "*"
     };
   }
